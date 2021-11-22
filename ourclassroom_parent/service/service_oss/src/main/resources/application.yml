@@ -1,11 +1,11 @@
 server:
-  port: 8120 # 服务端口
+  port: 8120 
 
 spring:
   profiles:
-    active: dev # 环境设置
+    active: dev 
   application:
-    name: service-oss # 服务名
+    name: service-oss
   #spring:
   cloud:
     loadbalancer:
@@ -13,12 +13,11 @@ spring:
         enable: false
     nacos:
       discovery:
-        server-addr: localhost:8848 # nacos server address
+        server-addr: localhost:8848 
 
 aliyun:
   oss:
     endpoint: oss-us-east-1.aliyuncs.com
-    keyid: LTAI5tLFK8DbSvH6H4HaEoQ3
-    keysecret: oKsbb9Z0XFSr510UKY4k6dLFM4RSG3
-    #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
+    keyid: <access-key>
+    keysecret: <acess-key-secret>
     bucketname: ourclassroom-file
