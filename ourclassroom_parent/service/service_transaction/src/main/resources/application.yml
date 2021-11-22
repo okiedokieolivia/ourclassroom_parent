@@ -1,0 +1,48 @@
+server:
+  port: 8170
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-transaction
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        port: 8081
+        dashboard: localhost:8080
+
+  datasource: # mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ourclassroom_transaction?serverTimezone=America/New_York
+    username: root
+    password: root
+  #spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: America/New_York
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath:com/ourclassroom/ourclassroom/service/trade/mapper/xml/*.xml
+  mapperLocations: classpath:**/xml/*.xml
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+
+feign:
+  sentinel:
+    enabled: true
+
+paypal:
+  mode: sandbox
+  client:
+    id: AWwWuNcQVEa2FggKleY3XjpeAUTZbA7XXLTFVlhzeDf-HqwegFV4AHIAf455y531eVQDb4ftPH-XmfM7
+    secret: ELtEi-URBeBGDvKWAtFb_AXCwzD82eEUn1Zn7x6Zw3uwTnTcmiBy97OtbLV3TsJeP48TQcOKtPkLoIyT
+  successUrl: "http://localhost:8170/api/transaction/paypal/pay/success"
+  cancelUrl: "http://localhost:8170/api/transaction/paypal/pay/cancel"

@@ -1,0 +1,49 @@
+server:
+  port: 8110 # service port
+  tomcat:
+    max-threads: 10
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-edu # service name
+  datasource: # mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ourclassroom_edu?serverTimezone=America/New_York
+    username: root
+    password: root
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: America/New_York
+  cloud:
+    # nacos config
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    # sentinel config
+    sentinel:
+      transport:
+        port: 8081
+        dashboard: localhost:8080
+# config sentinel with feign
+feign:
+  sentinel:
+    enabled: true
+
+#mybatis日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath:com/ourclassroom/ourclassroom/service/edu/mapper/xml/*.xml
+  mapperLocations: classpath:**/xml/*.xml
+
+service-oss:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#
+ribbon:
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  ConnectTimeout: 10000
+  ReadTimeout: 10000

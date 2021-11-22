@@ -1,0 +1,41 @@
+server:
+  port: 9110
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: infrastructure-apigateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true # gateway is able to visit other services registered on nacos
+      routes:
+        - id: service-edu
+          uri: lb://service-edu # the service name registered on nacos
+          predicates:
+            - Path=/user/**, /*/edu/**
+        - id: service-cms
+          uri: lb://service-cms
+          predicates:
+            - Path=/*/cms/**
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/*/oss/**
+        - id: service-transaction
+          uri: lb://service-transaction
+          predicates:
+            - Path=/*/transaction/**
+        - id: service-ucenter
+          uri: lb://service-ucenter
+          predicates:
+            - Path=/*/ucenter/**
+        - id: service-vod
+          uri: lb://service-vod
+          predicates:
+            - Path=/*/vod/**

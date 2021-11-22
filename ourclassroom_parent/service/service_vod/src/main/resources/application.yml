@@ -1,0 +1,30 @@
+server:
+  port: 8130
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-vod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA3IHD3H3JQ7E3QUPJ
+      secret-key: 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
+    region:
+      static: us-east-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: ourclassroom

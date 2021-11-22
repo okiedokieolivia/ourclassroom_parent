@@ -1,0 +1,50 @@
+server:
+  port: 8160
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-ucenter
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 117708137325-uf1vhapjb8vots1osiqsshk837dnndjf.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile
+  #spring:
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    database: 0
+#    password:
+#    lettuce:
+#      pool:
+#        max-active: 20
+#        max-wait: -1
+#        max-idle: 8
+#        min-idle: 0
+
+  datasource: # mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ourclassroom_ucenter?serverTimezone=America/New_York
+    username: root
+    password: root
+  #spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: America/New_York
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath:com/ourclassroom/ourclassroom/service/ucenter/mapper/xml/*.xml
+  mapperLocations: classpath:**/xml/*.xml
